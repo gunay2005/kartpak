@@ -1274,6 +1274,15 @@ body.menu-open #mobile-overlay {
 </footer>
 
 <script>
+  document.addEventListener("DOMContentLoaded", () => {
+  // Находим все картинки, кроме первых 2 (например, логотипа и баннера)
+  const images = document.querySelectorAll("img");
+  images.forEach((img, index) => {
+    if (index > 1) {
+      img.setAttribute("loading", "lazy");
+    }
+  });
+});
 document.addEventListener('DOMContentLoaded', () => {
   const IMG_BASE = 'images/';
   const PRODUCT_PHOTOS = {

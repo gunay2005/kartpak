@@ -2784,6 +2784,16 @@ body.menu-open #mobile-overlay {
   <!-- ===== ENHANCED SCRIPTS ===== -->
    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+  document.addEventListener("DOMContentLoaded", () => {
+  // Находим все картинки, кроме первых 2 (например, логотипа и баннера)
+  const images = document.querySelectorAll("img");
+  images.forEach((img, index) => {
+    if (index > 1) {
+      img.setAttribute("loading", "lazy");
+    }
+  });
+});
+
 document.addEventListener('DOMContentLoaded', function () {
   const section = document.getElementById('categories');
 
