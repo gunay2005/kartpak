@@ -1,0 +1,163 @@
+/* ============================================
+   KARTPAK — Custom Styles (Tailwind Companion)
+   ============================================ */
+/* --- Fonts Import --- */
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Manrope:wght@400;500;600;700&display=swap');
+
+/* --- Smooth Scrolling & Global Settings --- */
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: #c9a96e;
+  color: #0f2e26;
+}
+
+/* --- Custom Scrollbar --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #faf8f3;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0f2e26;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1a3c34;
+}
+
+/* --- Scroll Reveal Animations --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal.delay-100 { transition-delay: 0.1s; }
+.reveal.delay-200 { transition-delay: 0.2s; }
+.reveal.delay-300 { transition-delay: 0.3s; }
+.reveal.delay-400 { transition-delay: 0.4s; }
+
+/* --- Header Shrink on Scroll --- */
+#header.scrolled {
+  box-shadow: 0 4px 20px rgba(15, 46, 38, 0.08);
+}
+
+#header.scrolled .py-3\.5 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* --- Mobile Menu Dynamic Transition --- */
+#mobile-menu {
+  transition: max-height 0.35s ease, opacity 0.35s ease;
+}
+
+#mobile-menu:not(.hidden) {
+  animation: fadeInDown 0.3s ease forwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Form Fields & Focus States --- */
+input:focus, 
+textarea:focus {
+  outline: none;
+}
+
+input:invalid:not(:placeholder-shown),
+textarea:invalid:not(:placeholder-shown) {
+  border-color: rgba(239, 68, 68, 0.5);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #c9a96e;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* --- Cards & Interactive Elements --- */
+#partners img {
+  filter: grayscale(100%) brightness(0.7);
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+#partners img:hover {
+  filter: grayscale(0%) brightness(1);
+  transform: translateY(-2px);
+}
+
+#categories article {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#categories article:hover {
+  transform: translateY(-4px);
+}
+
+/* --- Process Section Decorator Line (Desktop) --- */
+@media (min-width: 1280px) {
+  #process .grid {
+    position: relative;
+  }
+  
+  #process .grid::before {
+    content: '';
+    position: absolute;
+    top: 3.5rem;
+    left: 8.33%;
+    right: 8.33%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #c9a96e, transparent);
+    opacity: 0.3;
+    z-index: 0;
+  }
+}
+
+/* --- Typography Adjustments for Mobile --- */
+@media (max-width: 640px) {
+  .font-serif {
+    letter-spacing: -0.01em;
+  }
+}
+
+/* --- Accessibility: Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+  
+  #mobile-menu {
+    transition: none;
+  }
+}

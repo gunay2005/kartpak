@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="az" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Haqqımızda — Kartpak</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            kp: {
+              green: '#0f2e26',
+              dark: '#1A2D27',
+              accent: '#c9a96e',
+              cream: '#F4F3EF',
+            }
+          },
+
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* =========================================================
+       SMOOTH SCROLL & SCROLLBAR
+    ========================================================= */
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #F6F1E9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #0F4A3A;
+      border-radius: 3px;
+    }
+
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+
+    #header {
+      transition: all 0.3s ease;
+    }
+
+    #header > div {
+      width: 90%;
+      max-width: 1180px;
+
+      background-color: rgba(248, 251, 250, 0.96) !important;
+
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+
+      border: 1px solid rgba(15, 74, 58, 0.12);
+
+      box-shadow: 0 8px 25px rgba(15, 46, 38, 0.08);
+
+      transition:
+        background-color 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+    }
+
+
+    /* =========================================================
+       LOGO
+    ========================================================= */
+
+    #header > div > a {
+      transform: translateY(-4px);
+    }
+
+    #header img:not([src*="flagcdn"]) {
+      filter:
+        brightness(0)
+        saturate(100%)
+        invert(20%)
+        sepia(35%)
+        saturate(850%)
+        hue-rotate(115deg)
+        brightness(92%)
+        contrast(92%);
+    }
+
+
+    /* =========================================================
+       DESKTOP NAVIGATION
+    ========================================================= */
+
+    #header > div > nav {
+      display: none;
+      align-items: center;
+    }
+
+    #header nav a {
+      color: #176B55 !important;
+      font-weight: 500 !important;
+      transition: color 0.25s ease;
+    }
+
+    #header nav a:hover {
+      color: #0B4032 !important;
+    }
+
+    #header nav a[aria-current="page"] {
+      color: #0B4032 !important;
+      font-weight: 700 !important;
+    }
+
+    #header nav a span {
+      display: none !important;
+    }
+
+
+    /* =========================================================
+       LANGUAGE SELECTOR
+    ========================================================= */
+
+    #header .group > button {
+      transform: translateY(-2px);
+      color: #1A4530 !important;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    #header .group > button span,
+    #header .group > button svg {
+      color: #1A4530 !important;
+    }
+
+    #header .group > button:hover span,
+    #header .group > button:hover svg {
+      color: #0F4A3A !important;
+    }
+
+
+    /* =========================================================
+       LANGUAGE DROPDOWN
+    ========================================================= */
+
+    #header .absolute.right-0 {
+      background-color: #ffffff !important;
+
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+
+      border: 1px solid rgba(15, 74, 58, 0.12) !important;
+
+      box-shadow: 0 20px 35px rgba(15, 46, 38, 0.14) !important;
+    }
+
+    #header .absolute.right-0 a {
+      color: #0F4A3A !important;
+      font-weight: 600 !important;
+
+      transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+    }
+
+    #header .absolute.right-0 a:first-child {
+      background-color: rgba(15, 74, 58, 0.08) !important;
+      color: #0F4A3A !important;
+    }
+
+    #header .absolute.right-0 a:hover {
+      background-color: rgba(15, 74, 58, 0.07) !important;
+      color: #0F4A3A !important;
+    }
+
+
+    /* =========================================================
+       FLAGS
+    ========================================================= */
+
+    #header .group > button img,
+    #header .absolute.right-0 img {
+      display: block;
+    }
+
+
+    
+/* MOBILE SIDE MENU — HAQQIMIZDA */
+
+#mobile-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  background: rgba(0, 0, 0, 0.42);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 200ms ease, visibility 0s linear 260ms;
+}
+
+#mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  width: min(86%, 380px);
+  height: 100vh;
+  height: 100dvh;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  background: #F6F1E9;
+  box-shadow: -15px 0 45px rgba(15, 46, 38, 0.18);
+  transform: translate3d(100%, 0, 0);
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    transform 260ms cubic-bezier(.22, .61, .36, 1),
+    visibility 0s linear 260ms;
+  will-change: transform;
+}
+
+body.menu-open {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body.menu-open #mobile-menu {
+  transform: translate3d(0, 0, 0);
+  visibility: visible;
+  pointer-events: auto;
+  transition:
+    transform 260ms cubic-bezier(.22, .61, .36, 1),
+    visibility 0s;
+}
+
+body.menu-open #mobile-overlay {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity 200ms ease, visibility 0s;
+}
+
+.mobile-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 22px;
+  border-bottom: 1px solid rgba(15, 74, 58, 0.12);
+}
+
+.mobile-menu-logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.mobile-menu-logo img {
+  display: block;
+  width: auto;
+  height: 36px;
+  object-fit: contain;
+  filter:
+    brightness(0)
+    saturate(100%)
+    invert(20%)
+    sepia(35%)
+    saturate(850%)
+    hue-rotate(115deg)
+    brightness(92%)
+    contrast(92%);
+}
+
+.mobile-menu-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  color: #0F4A3A;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(15, 74, 58, 0.12);
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-menu-close svg {
+  width: 21px;
+  height: 21px;
+}
+
+.mobile-menu-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  flex: 1;
+  padding: 20px;
+}
+
+#mobile-menu .mobile-nav-link {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 14px 15px;
+  border-radius: 10px;
+  color: #1A4530;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-decoration: none;
+  transition: background-color 160ms ease, color 160ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#mobile-menu .mobile-nav-link:hover,
+#mobile-menu .mobile-nav-link:focus-visible {
+  color: #0F4A3A;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+#mobile-menu .mobile-nav-link[aria-current="page"] {
+  color: #0F4A3A;
+  background: #E7F0E8;
+  font-weight: 700;
+}
+
+.mobile-menu-languages {
+  padding: 20px 22px;
+  border-top: 1px solid rgba(15, 74, 58, 0.12);
+}
+
+.mobile-menu-languages p {
+  margin: 0 0 12px;
+  color: #567267;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.mobile-language-list {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mobile-language-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  min-height: 42px;
+  padding: 0 14px;
+  color: #1A4530;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(15, 74, 58, 0.14);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.mobile-language-link.active,
+.mobile-language-link:hover {
+  color: #fff;
+  background: #0F4A3A;
+  border-color: #0F4A3A;
+}
+
+#mobile-menu button:focus-visible,
+#mobile-menu a:focus-visible {
+  outline: 2px solid #176B55;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #mobile-menu,
+  #mobile-overlay,
+  #mobile-menu .mobile-nav-link {
+    transition: none !important;
+  }
+}
+
+
+
+    /* =========================================================
+       HEADER ON SCROLL
+    ========================================================= */
+
+    #header.scrolled > div {
+      background-color: rgba(255, 255, 255, 0.98) !important;
+      border-color: rgba(15, 74, 58, 0.16);
+      box-shadow: 0 12px 32px rgba(15, 46, 38, 0.12);
+    }
+
+
+   /* =========================================
+   ABOUT — ELEGANT TYPOGRAPHY
+========================================= */
+
+.about-heading {
+  font-family: 'Roboto', sans-serif;
+  font-size: inherit;
+  font-weight: 600;
+  color: #174A43;
+  letter-spacing: -0.045em;
+  line-height: 1.2;
+}
+
+/* Без подчёркивающей линии */
+.about-heading::after {
+  content: none;
+  display: none;
+}
+
+/* KartPak MMC — фирменный акцент */
+
+.about-brand {
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-weight: 700;
+  color: #07545A;
+  letter-spacing: -0.035em;
+
+
+  border-radius: 5px;
+  padding: 1px 5px;
+
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+
+    /* =========================================================
+       TABLET & DESKTOP
+    ========================================================= */
+
+    @media (min-width: 1024px) {
+      #header > div > nav {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 1023px) {
+      #header > div {
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+
+      #header > div > a {
+        transform: translateY(-4px);
+      }
+    }
+
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
+    @media (max-width: 640px) {
+      #header {
+        top: 12px;
+      }
+
+      #header > div {
+        width: 92%;
+        padding-left: 18px;
+        padding-right: 18px;
+        padding-top: 14px;
+        padding-bottom: 14px;
+        border-radius: 999px;
+      }
+
+      #header > div > a {
+        transform: none;
+      }
+
+      #header img:not([src*="flagcdn"]) {
+        height: 34px;
+      }
+
+      .about-heading::after {
+        margin-top: 14px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      #header,
+      #header > div,
+      #mobile-menu,
+      #mobile-menu .mobile-nav-link {
+        transition: none;
+      }
+    }
+
+     /* =========================================
+   FLOATING CONTACT ICONS — KARTPAK
+/* =====================================
+   WHATSAPP + PHONE — PREMIUM FLOATING
+===================================== */
+
+.floating-actions {
+  position: fixed;
+  right: 22px;
+  bottom: 26px;
+  z-index: 9000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 19px;
+}
+
+.floating-action {
+  --accent: 37, 211, 102;
+
+  position: relative;
+  isolation: isolate;
+  width: 61px;
+  height: 61px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  background: #25D366;
+  border: 2px solid rgba(255,255,255,.9);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+
+  box-shadow:
+    0 5px 12px rgba(0,0,0,.10),
+    0 8px 24px rgba(var(--accent),.36),
+    inset 0 2px 3px rgba(255,255,255,.35);
+
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+/* Светящиеся сигналы */
+
+.floating-action::before,
+.floating-action::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  z-index: -1;
+  border: 2px solid rgba(var(--accent),.65);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: contactPulse 2.5s ease-out infinite;
+}
+
+.floating-action::after {
+  animation-delay: 1.25s;
+}
+
+@keyframes contactPulse {
+  0% {
+    transform: scale(.9);
+    opacity: .7;
+  }
+  100% {
+    transform: scale(1.65);
+    opacity: 0;
+  }
+}
+
+/* Внутренний круг */
+
+.floating-action .action-core {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: inherit;
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,.20),
+    transparent 48%
+  );
+}
+
+.floating-action svg {
+  display: block;
+  width: 28px;
+  height: 28px;
+  color: #fff;
+  transition: transform .3s ease;
+}
+
+/* WHATSAPP — фирменный зелёный */
+
+.floating-action--whatsapp {
+  --accent: 37, 211, 102;
+  background: linear-gradient(145deg, #45EF84, #25D366 55%, #0CB957);
+  box-shadow:
+    0 5px 12px rgba(0,0,0,.10),
+    0 8px 26px rgba(37,211,102,.42),
+    inset 0 2px 3px rgba(255,255,255,.4);
+}
+
+/* PHONE — яркий синий */
+
+.floating-action--phone {
+  --accent: 43, 119, 255;
+  background: linear-gradient(145deg, #63A4FF, #2878FF 55%, #1555DF);
+  box-shadow:
+    0 5px 12px rgba(0,0,0,.10),
+    0 8px 26px rgba(43,119,255,.42),
+    inset 0 2px 3px rgba(255,255,255,.4);
+}
+
+.floating-action--phone svg {
+  animation: phoneRing 2.8s ease-in-out infinite;
+}
+
+@keyframes phoneRing {
+  0%, 80%, 100% { transform: rotate(0); }
+  83% { transform: rotate(-12deg); }
+  86% { transform: rotate(12deg); }
+  89% { transform: rotate(-8deg); }
+  92% { transform: rotate(5deg); }
+  95% { transform: rotate(0); }
+}
+
+/* Наведение */
+
+.floating-action:hover {
+  transform: scale(1.1);
+  box-shadow:
+    0 8px 16px rgba(0,0,0,.12),
+    0 12px 34px rgba(var(--accent),.5),
+    inset 0 2px 3px rgba(255,255,255,.4);
+}
+
+.floating-action:hover svg {
+  transform: scale(1.1);
+}
+
+.floating-action:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+}
+
+@media (max-width: 640px) {
+  .floating-actions {
+    right: 15px;
+    bottom: max(20px, env(safe-area-inset-bottom));
+    gap: 16px;
+  }
+
+  .floating-action {
+    width: 54px;
+    height: 54px;
+  }
+
+  .floating-action svg {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-action::before,
+  .floating-action::after,
+  .floating-action--phone svg {
+    animation: none !important;
+  }
+
+  .floating-action,
+  .floating-action svg {
+    transition: none !important;
+  }
+}
+  </style>
+</head>
+
+
+<body
+  class="font-sans mt-2 text-gray-800 antialiased bg-white selection:bg-[#34D399] selection:text-black "
+>
+
+  <!-- =========================================================
+       HEADER
+  ========================================================= -->
+
+  <header
+    id="header"
+    class="fixed top-4 left-0 right-0 z-50 transition-all duration-300"
+  >
+
+    <div
+      class="relative w-[90%] max-w-[1180px] mx-auto rounded-full bg-[#F8FBFA]/95 backdrop-blur-[8px] border border-[#0F4A3A]/10 shadow-md px-5 sm:px-7 lg:px-10 xl:px-12 py-[20px] flex items-center justify-between gap-4"
+    >
+
+      <!-- LOGO -->
+
+      <a
+        href="../index.html"
+        class="flex items-center shrink-0 -mt-1"
+        aria-label="Kartpak Ana səhifə"
+      >
+        <img
+          src="../images/kartpak_6_images/logo kartp.svg"
+          alt="Kartpak"
+          class="h-9 w-auto object-contain"
+        >
+      </a>
+
+
+      <!-- DESKTOP NAVIGATION -->
+
+      <nav class="hidden lg:flex items-center gap-[38px] xl:gap-[46px]">
+
+        <a
+          href="../index.html"
+          class="relative text-[16px] font-medium pb-1 group"
+        >
+          Ana səhifə
+          <span
+            class="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full opacity-0"
+          ></span>
+        </a>
+
+        <a
+          href="./"
+          aria-current="page"
+          class="relative text-[16px] font-semibold pb-1"
+        >
+          Haqqımızda
+          <span
+            class="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full"
+          ></span>
+        </a>
+
+        <a
+          href="../kateqoriyalar/index.html"
+          class="relative text-[16px] font-medium pb-1 group"
+        >
+          Kateqoriyalar
+          <span
+            class="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full opacity-0"
+          ></span>
+        </a>
+
+        <a
+          href="../index.html#partners"
+          class="relative text-[16px] font-medium pb-1 group"
+        >
+          İstehsal prosesi
+          <span
+            class="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full opacity-0"
+          ></span>
+        </a>
+
+        <a
+          href="../index.html#contact"
+          class="relative text-[16px] font-medium pb-1 group"
+        >
+          Əlaqə
+          <span
+            class="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full opacity-0"
+          ></span>
+        </a>
+
+      </nav>
+
+
+      <!-- LANGUAGE SELECTOR -->
+
+      <div class="hidden sm:block relative group shrink-0">
+
+        <button
+          type="button"
+          class="flex items-center gap-2.5 text-[14px] font-bold text-[#1A4530] py-1 focus:outline-none"
+          aria-label="Dil seçimi"
+        >
+
+          <div
+            class="relative w-6 h-6 rounded-full overflow-hidden shrink-0 shadow-[0_3px_8px_rgba(0,0,0,0.18)] ring-1 ring-[#0F4A3A]/20"
+          >
+            <img
+              src="https://flagcdn.com/w80/az.png"
+              alt="AZ"
+              class="w-full h-full object-cover saturate-200 contrast-125 scale-110"
+            >
+
+            <div
+              class="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-black/20 pointer-events-none"
+            ></div>
+          </div>
+
+          <span>AZ</span>
+
+          <svg
+            class="w-3.5 h-3.5 text-[#1A4530] group-hover:rotate-180 transition-transform duration-200"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+
+        </button>
+
+
+        <!-- LANGUAGE DROPDOWN -->
+
+        <div
+          class="absolute right-0 top-full mt-2 w-36 bg-white backdrop-blur-md rounded-2xl shadow-2xl border border-[#0F4A3A]/10 py-2.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+        >
+
+          <!-- AZ -->
+
+          <a
+            href="#"
+            class="flex items-center gap-3 px-3.5 py-2 text-xs font-bold text-[#0F4A3A] bg-[#0F4A3A]/8 hover:bg-[#0F4A3A]/10 transition-colors"
+          >
+            <div
+              class="relative w-5 h-5 rounded-full overflow-hidden shrink-0 shadow-[0_2px_5px_rgba(0,0,0,0.2)] ring-1 ring-black/10"
+            >
+              <img
+                src="https://flagcdn.com/w80/az.png"
+                alt="AZ"
+                class="w-full h-full object-cover saturate-200 contrast-125 scale-110"
+              >
+              <div
+                class="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-black/20 pointer-events-none"
+              ></div>
+            </div>
+            AZ
+          </a>
+
+
+          <!-- EN -->
+
+          <a
+            href="#"
+            class="flex items-center gap-3 px-3.5 py-2 text-xs font-semibold text-[#0F4A3A]/80 hover:text-[#0F4A3A] hover:bg-[#0F4A3A]/5 transition-colors"
+          >
+            <div
+              class="relative w-5 h-5 rounded-full overflow-hidden shrink-0 shadow-[0_2px_5px_rgba(0,0,0,0.2)] ring-1 ring-black/10"
+            >
+              <img
+                src="https://flagcdn.com/w80/gb.png"
+                alt="EN"
+                class="w-full h-full object-cover saturate-200 contrast-125 scale-110"
+              >
+              <div
+                class="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-black/20 pointer-events-none"
+              ></div>
+            </div>
+            EN
+          </a>
+
+
+          <!-- RU -->
+
+          <a
+            href="#"
+            class="flex items-center gap-3 px-3.5 py-2 text-xs font-semibold text-[#0F4A3A]/80 hover:text-[#0F4A3A] hover:bg-[#0F4A3A]/5 transition-colors"
+          >
+            <div
+              class="relative w-5 h-5 rounded-full overflow-hidden shrink-0 shadow-[0_2px_5px_rgba(0,0,0,0.2)] ring-1 ring-black/10"
+            >
+              <img
+                src="https://flagcdn.com/w80/ru.png"
+                alt="RU"
+                class="w-full h-full object-cover saturate-200 contrast-125 scale-110"
+              >
+              <div
+                class="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-black/20 pointer-events-none"
+              ></div>
+            </div>
+            RU
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <!-- MOBILE MENU BUTTON -->
+
+      <button
+        id="menu-toggle"
+        type="button"
+        class="lg:hidden inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#0F4A3A]/15 bg-white/80 text-[#0F4A3A] transition-colors hover:bg-[#EAF3F1] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#004C54]"
+        aria-label="Menyunu aç"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg
+          class="w-5 h-5"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path d="M4 7H20"></path>
+          <path d="M4 12H20"></path>
+          <path d="M4 17H20"></path>
+        </svg>
+      </button>
+
+
+    
+<!-- MOBILE MENU OVERLAY -->
+<div
+  id="mobile-overlay"
+  class="lg:hidden"
+  aria-hidden="true"
+></div>
+
+<!-- MOBILE SIDE MENU -->
+<aside
+  id="mobile-menu"
+  class="lg:hidden"
+  aria-label="Mobil menyu"
+  aria-hidden="true"
+  inert
+>
+  <div class="mobile-menu-header">
+    <a
+      href="../index.html"
+      class="mobile-menu-logo"
+      aria-label="Kartpak Ana səhifə"
+    >
+      <img
+        src="../images/kartpak_6_images/logo kartp.svg"
+        alt="Kartpak"
+      >
+    </a>
+
+    <button
+      id="menu-close"
+      type="button"
+      class="mobile-menu-close"
+      aria-label="Menyunu bağla"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18"/>
+      </svg>
+    </button>
+  </div>
+
+  <nav class="mobile-menu-nav" aria-label="Mobil naviqasiya">
+    <a href="../index.html" class="mobile-nav-link">Ana səhifə</a>
+    <a href="./" class="mobile-nav-link" aria-current="page">Haqqımızda</a>
+    <a href="../kateqoriyalar/index.html" class="mobile-nav-link">Kateqoriyalar</a>
+    <a href="../index.html#partners" class="mobile-nav-link">İstehsal prosesi</a>
+    <a href="../index.html#contact" class="mobile-nav-link">Əlaqə</a>
+  </nav>
+
+  <div class="mobile-menu-languages">
+    <p>Dil seçimi</p>
+    <div class="mobile-language-list">
+      <a href="#" class="mobile-language-link active" lang="az" aria-current="true">AZ</a>
+      <a href="#" class="mobile-language-link" lang="en">EN</a>
+      <a href="#" class="mobile-language-link" lang="ru">RU</a>
+    </div>
+  </div>
+</aside>
+
+
+    </div>
+
+  </header>
+
+
+
+  <!-- =========================================================
+       ABOUT SECTION
+  ========================================================= -->
+
+  <main class="bg-white text-[#18352D] pt-32 pb-16 sm:pt-36 sm:pb-20 lg:pt-40 lg:pb-28">
+
+    <section class="max-w-[1240px] mx-auto px-5 sm:px-8 lg:px-10">
+
+      <div
+        class="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-10 sm:gap-12 lg:gap-20 items-center"
+      >
+
+        <!-- LEFT — TEXT -->
+
+        <div class="w-full max-w-[560px] mx-auto lg:mx-0">
+
+          <h1 class="about-heading text-[34px] sm:text-[40px] lg:text-[46px] mb-7 sm:mb-8">
+            Haqqımızda
+          </h1>
+
+          <div
+            class="space-y-6 text-[17px] sm:text-[19px] lg:text-[21px] leading-[1.8] text-[#52635D]"
+          >
+
+            <p>
+              <span class="about-brand">KartPak MMC</span>
+              müasir bizneslər üçün funksional və estetik
+              qablaşdırma həlləri təqdim edən istehsal şirkətidir.
+              Biz məhsulun yalnız qorunmasına deyil, onun müştəriyə
+              necə təqdim olunmasına da önəm veririk.
+            </p>
+
+            <p>
+              Karton qutular, premium sərt qutular, kağız çantalar və
+              digər korporativ qablaşdırma həllərini müasir istehsal
+              imkanları və fərdi yanaşma ilə hazırlayırıq.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- RIGHT — IMAGE -->
+
+        <div class="w-full min-w-0">
+
+          <div
+            class="w-full overflow-hidden rounded-[18px] sm:rounded-[22px] lg:rounded-[24px] bg-[#F1EDE5]"
+          >
+
+            <img
+              src="../images/kartpak_6_images/Kartpak_high_quality_80KB.jpg"
+              alt="KartPak tərəfindən hazırlanmış qablaşdırma"
+              class="w-full h-auto block object-contain"
+              loading="eager"
+              decoding="async"
+            >
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================= -->
+
+<!-- FOOTER — SAME DESIGN AS ANA SƏHİFƏ -->
+
+<footer class="w-full bg-[#26544B] text-[#EFECE6] font-sans pt-16 border-t border-white/10">
+  <div class="max-w-[1400px] mx-auto px-6 sm:px-10">
+
+    <!-- Top Grid Container -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-6 items-center pb-12">
+
+      <!-- Left Column: Logo + Contacts -->
+      <div class="md:col-span-4 self-start -mt-5 flex flex-col items-center md:items-start text-center md:text-left space-y-4">
+
+        <a href="/#hero" class="inline-block transition-opacity duration-300 hover:opacity-90">
+          <img
+            src="/images/kartpak_6_images/logo kartp.svg"
+            alt="Kartpak"
+            class="h-12 sm:h-14 lg:h-15 w-auto object-contain brightness-0 invert"
+          >
+        </a>
+
+        <div class="pt-1 flex flex-col items-center md:items-start space-y-2.5 text-xs sm:text-sm text-white/85">
+
+          <!-- Address -->
+          <div class="flex items-center gap-2.5">
+            <svg class="w-4 h-4 text-[#BC9E7A] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            <span>Bakı şəhəri, Biləcəri qəsəbəsi, Asəf Zeynallı 1a</span>
+          </div>
+
+          <!-- Phone -->
+          <div class="flex items-center gap-2.5">
+            <svg class="w-4 h-4 text-[#BC9E7A] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+            <span>+994 070 342 66 09</span>
+          </div>
+
+          <!-- Email -->
+          <div class="flex items-center gap-2.5">
+            <svg class="w-4 h-4 text-[#BC9E7A] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            <span>info@kartpak.az</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Empty spacing — no vertical line -->
+<div class="hidden md:block md:col-span-1"></div>
+
+      <!-- Navigation Links -->
+    <div class="md:col-span-3 flex flex-col items-center md:items-start space-y-3 text-sm sm:text-base text-white/90 font-light">
+
+        <a href="/#hero" class="hover:text-[#BC9E7A] transition-colors">
+          Ana səhifə
+        </a>
+
+        <a href="/haqqimizda/" class="hover:text-[#BC9E7A] transition-colors">
+          Haqqımızda
+        </a>
+
+        <a href="/kateqoriyalar/" class="hover:text-[#BC9E7A] transition-colors">
+          Kateqoriyalar
+        </a>
+
+        <a href="/#production-process" class="hover:text-[#BC9E7A] transition-colors">
+          İstehsal prosesi
+        </a>
+
+        <a href="/#contact" class="hover:text-[#BC9E7A] transition-colors">
+          Əlaqə
+        </a>
+
+      </div>
+
+    <!-- Empty spacing — no vertical line -->
+<div class="hidden md:block md:col-span-1"></div>
+
+      <!-- Right Column: Slogan + Social Media -->
+      <div class="md:col-span-3 flex flex-col items-center text-center">
+
+        <!-- Box Icon -->
+        <div class="mb-3 text-[#BC9E7A]">
+          <svg class="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 2L21 7V17L12 22L3 17V7L12 2Z"/>
+            <path d="M12 2V12L21 17"/>
+            <path d="M12 12L3 17"/>
+          </svg>
+        </div>
+
+        <!-- Tagline -->
+        <p class="text-sm sm:text-base text-white/95 font-light leading-relaxed max-w-[240px]">
+          Qablaşdırmada <br>
+          <span class="text-white/75">keyfiyyətə açılan yol.</span>
+        </p>
+
+        <!-- Social Media Icons -->
+        <div class="flex items-center gap-3.5 mt-5">
+
+          <!-- Instagram -->
+          <a
+            href="https://www.instagram.com/kartpak_karton_qutu_fabriki/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            class="w-10 h-10 rounded-full border border-[#BC9E7A]/40 bg-white/[0.02] text-[#BC9E7A] flex items-center justify-center hover:border-[#E1306C] hover:bg-gradient-to-tr hover:from-[#F58529] hover:via-[#DD2A7B] hover:to-[#8134AF] hover:text-white hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(221,42,123,0.35)] transition-all duration-300"
+          >
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+
+          <!-- Facebook -->
+          <a
+            href="https://www.facebook.com/kartpak.karton.qutu.fabriki/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+            class="w-10 h-10 rounded-full border border-[#BC9E7A]/40 bg-white/[0.02] text-[#BC9E7A] flex items-center justify-center hover:border-[#1877F2] hover:bg-[#1877F2] hover:text-white hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(24,119,242,0.35)] transition-all duration-300"
+          >
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.5 5H18V0h-3.808C10.592 0 9 1.583 9 4.615V8z"/>
+            </svg>
+          </a>
+
+          <!-- LinkedIn -->
+          <a
+            href="https://www.linkedin.com/in/kartpak-llc-a21a58372/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            class="w-10 h-10 rounded-full border border-[#BC9E7A]/40 bg-white/[0.02] text-[#BC9E7A] flex items-center justify-center hover:border-[#0A66C2] hover:bg-[#0A66C2] hover:text-white hover:-translate-y-1 hover:shadow-[0_8px_20px_rgba(10,102,194,0.35)] transition-all duration-300"
+          >
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+          </a>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright & Developer Credit -->
+    <div class="relative pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+
+      <!-- Mini Box Icon on Divider -->
+      <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#26544B] px-3 text-[#BC9E7A]">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M12 2L20 6.5V17.5L12 22L4 17.5V6.5L12 2Z"/>
+          <path d="M12 2V12M12 12L20 6.5M12 12L4 6.5"/>
+        </svg>
+      </div>
+
+      <!-- Copyright -->
+      <p class="text-xs text-white/60 tracking-wide text-center">
+        © 2026 KARTPAK. Bütün hüquqlar qorunur.
+      </p>
+
+      <!-- Developed By -->
+      <a
+        href="#"
+        class="group inline-flex items-center gap-2 text-white transition-colors duration-300"
+        aria-label="Developed by"
+      >
+        <span class="text-[15px] tracking-wide whitespace-nowrap -mt-4">
+          Developed by
+        </span>
+
+        <img
+          src="/images/kartpak_6_images/gunaweb ag 1.svg"
+          alt="Developer logo"
+          class="block h-16 sm:h-20 w-auto max-w-[180px] object-contain -mt-4 transition-opacity duration-300"
+        >
+      </a>
+
+    </div>
+  </div>
+</footer>
+
+
+
+  <!-- =========================================================
+       HEADER & MOBILE MENU SCRIPT
+  ========================================================= -->
+
+  <script>
+   
+(() => {
+  const header = document.getElementById('header');
+  const menuToggle = document.getElementById('menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileOverlay = document.getElementById('mobile-overlay');
+  const menuClose = document.getElementById('menu-close');
+
+  // Эффект шапки при прокрутке
+  const updateHeader = () => {
+    if (header) {
+      header.classList.toggle('scrolled', window.scrollY > 30);
+    }
+  };
+
+  window.addEventListener('scroll', updateHeader, { passive: true });
+  updateHeader();
+
+  if (!menuToggle || !mobileMenu || !mobileOverlay || !menuClose) {
+    return;
+  }
+
+  const isOpen = () => document.body.classList.contains('menu-open');
+
+  function openMenu() {
+    if (isOpen()) return;
+
+    document.body.classList.add('menu-open');
+    menuToggle.setAttribute('aria-expanded', 'true');
+    menuToggle.setAttribute('aria-label', 'Menyunu bağla');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    mobileOverlay.setAttribute('aria-hidden', 'false');
+    mobileMenu.removeAttribute('inert');
+
+    menuClose.focus({ preventScroll: true });
+  }
+
+  function closeMenu(restoreFocus = true) {
+    if (!isOpen()) return;
+
+    document.body.classList.remove('menu-open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    menuToggle.setAttribute('aria-label', 'Menyunu aç');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    mobileOverlay.setAttribute('aria-hidden', 'true');
+    mobileMenu.setAttribute('inert', '');
+
+    if (restoreFocus && window.innerWidth < 1024) {
+      menuToggle.focus({ preventScroll: true });
+    }
+  }
+
+  menuToggle.addEventListener('click', () => {
+    if (isOpen()) {
+      closeMenu(false);
+    } else {
+      openMenu();
+    }
+  });
+
+  menuClose.addEventListener('click', () => closeMenu());
+  mobileOverlay.addEventListener('click', () => closeMenu());
+
+  mobileMenu.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => closeMenu(false));
+  });
+
+  document.addEventListener('keydown', event => {
+    if (!isOpen()) return;
+
+    if (event.key === 'Escape') {
+      closeMenu();
+      return;
+    }
+
+    if (event.key === 'Tab') {
+      const focusable = mobileMenu.querySelectorAll(
+        'a[href], button:not([disabled])'
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (!first || !last) return;
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1024) {
+      closeMenu(false);
+    }
+  });
+})();
+
+  </script>
+<!-- FIXED FLOATING CONTACT ICONS -->
+<div class="floating-actions" aria-label="Əlaqə vasitələri">
+
+  <!-- WHATSAPP -->
+  <a
+    href="https://wa.me/994703426609"
+    class="floating-action floating-action--whatsapp"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="WhatsApp ilə əlaqə"
+  >
+    <span class="action-core">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M20.52 3.48A11.82 11.82 0 0 0 12.06 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.6 5.96L.06 24l6.28-1.65a11.88 11.88 0 0 0 5.72 1.46h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.17-1.23-6.15-3.44-8.43ZM12.07 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.73.98 1-3.64-.23-.37a9.83 9.83 0 0 1-1.51-5.28C2.2 6.47 6.63 2.04 12.07 2.04c2.63 0 5.1 1.03 6.96 2.9a9.78 9.78 0 0 1 2.89 6.97c0 5.45-4.43 9.89-9.85 9.89Zm5.42-7.4c-.3-.15-1.77-.87-2.05-.97-.28-.1-.48-.15-.68.15-.2.3-.78.97-.96 1.17-.18.2-.35.22-.65.07-.3-.15-1.25-.46-2.39-1.47-.88-.78-1.47-1.74-1.64-2.03-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.68-1.64-.93-2.24-.24-.58-.49-.5-.68-.51h-.58c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.21 5.08 4.5.71.31 1.27.49 1.7.63.72.23 1.37.2 1.89.12.58-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z"/>
+      </svg>
+    </span>
+  </a>
+
+  <!-- PHONE -->
+  <a
+    href="tel:+994703426609"
+    class="floating-action floating-action--phone"
+    aria-label="Zəng et: +994 70 342 66 09"
+  >
+    <span class="action-core">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.9"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.19 18a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.09 3.18 2 2 0 0 1 4.08 1h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.06 8.9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.58 2.8.7a2 2 0 0 1 1.76 2.04Z"/>
+      </svg>
+    </span>
+  </a>
+
+</div>
+</body>
+</html>
